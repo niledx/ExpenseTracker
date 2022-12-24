@@ -1,6 +1,7 @@
 import React from 'react';
 import { FC } from 'react';
 import ExpenseItem from './ExpenseItem';
+import './Expenses.css'
 
 interface Props {
 	expenses: {
