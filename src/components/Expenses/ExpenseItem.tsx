@@ -1,6 +1,7 @@
 import './ExpenseItem.css';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import ExpenseDate from './ExpenseDate';
+import Card from '../UI/Card';
 
 interface Props {
 	title: string;
@@ -9,16 +10,19 @@ interface Props {
 }
 
 const ExpenseItem: FC<Props> = ({ title, amount, date }) => {
+	const [titleState, setTitle] = useState(title);
+	const handleClick = () =>{
+		setTitle('Updated!')
+	}
 	return (
-		<div className="expense-item">
-			<div>
-				<ExpenseDate date={date} />
-			</div>
+		<Card className="expense-item">
+			<ExpenseDate date={date} />
 			<div className="expense-item__description">
-				<h2>{title}</h2>
+				<h2>{titleState}</h2>
 				<div className="expense-item__price">{amount}</div>
 			</div>
-		</div>
+			<button onClick={handleClick}>Click</button>
+		</Card>
 	);
 };
 
