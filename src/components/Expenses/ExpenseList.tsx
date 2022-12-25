@@ -17,7 +17,7 @@ const ExpenseList: FC<Props> = ({ filteredExpenses }) => {
 	}
 
 	if (filteredExpenses.length > 0) {
-		return <ul>
+		return <ul className='expenses-list'>
 			{filteredExpenses.length > 0 &&
 				filteredExpenses.map((expense) => (
 					<ExpenseItem

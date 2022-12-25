@@ -4,6 +4,7 @@ import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 import Card from '../UI/Card';
 import ExpenseList from './ExpenseList';
 import './Expenses.css';
+import ExpensesChart from './ExpensesChart';
 
 interface Props {
 	expenses: {
@@ -35,6 +36,7 @@ const Expenses: FC<Props> = ({ expenses }) => {
 		<div>
 			<Card className="expenses">
 				<ExpenseFilter pickedYear={pickedYear} setPickedYear={setPickedYear} />
+				<ExpensesChart expenses={filteredExpenses}/>
 				<ExpenseList filteredExpenses={filteredExpenses}/>
 			</Card>
 		</div>

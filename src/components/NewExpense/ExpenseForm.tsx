@@ -18,9 +18,10 @@ interface Props {
 			}[]
 		>
 	>;
+	setIsOpen: React.Dispatch<SetStateAction<Boolean>>;
 }
 
-const ExpenseForm: FC<Props> = ({ expenses, setExpenses }) => {
+const ExpenseForm: FC<Props> = ({ expenses, setExpenses, setIsOpen }) => {
 	const [ title, setTitle ] = useState('');
 	const [ amount, setAmount ] = useState('');
 	const [ date, setDate ] = useState('');
@@ -38,7 +39,7 @@ const ExpenseForm: FC<Props> = ({ expenses, setExpenses }) => {
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const expesneData = {
-            id: Math.floor(Math.random() * 100).toString(),
+			id: Math.floor(Math.random() * 100).toString(),
 			title,
 			amount: +amount,
 			date: new Date(date)
@@ -47,7 +48,12 @@ const ExpenseForm: FC<Props> = ({ expenses, setExpenses }) => {
 		setTitle('');
 		setAmount('');
 		setDate('');
+        setIsOpen(false);
 	};
+
+    const handleCancel = () => {
+        setIsOpen(false);
+    }
 
 	return (
 		<form onSubmit={submitHandler}>
@@ -65,7 +71,8 @@ const ExpenseForm: FC<Props> = ({ expenses, setExpenses }) => {
 					<input type="date" value={date} min="2019-01-01" max="2022-12-31" onChange={handleDateChange} />
 				</div>
 				<div className="new-expense__actions">
-					<button type="submit">Add Expense</button>
+					<button onClick={handleCancel}>Cancel</button>
+                    <button type="submit">Add Expense</button>
 				</div>
 			</div>
 		</form>
