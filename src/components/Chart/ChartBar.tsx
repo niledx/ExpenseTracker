@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ChartBar: FC<Props> = ({ value, maxValue, label }) => {
-	let barFillHeight: any = '0%';
+	let barFillHeight: string = '0%';
 
 	if (maxValue > 0) {
 		barFillHeight = Math.round((value.valueOf() / maxValue.valueOf()) * 100) + '%';
