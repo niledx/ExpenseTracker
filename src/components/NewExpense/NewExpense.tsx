@@ -1,13 +1,32 @@
-import React from 'react'
-import ExpenseForm from './ExpenseForm'
-import './NewExpense.css'
+import React, { FC, SetStateAction } from 'react';
+import ExpenseForm from './ExpenseForm';
+import './NewExpense.css';
 
-const NewExpense = () => {
-  return (
-    <div className='new-expense'>
-        <ExpenseForm/>
-    </div>
-  )
+interface Props {
+	expenses: {
+        id: string;
+        title: string;
+        amount: number;
+        date: Date;
+    }[];
+	setExpenses: React.Dispatch<
+		SetStateAction<
+			{
+				id: string;
+				title: string;
+				amount: number;
+				date: Date;
+			}[]
+		>
+	>;
 }
 
-export default NewExpense
+const NewExpense: FC<Props> = ({ expenses, setExpenses }) => {
+	return (
+		<div className="new-expense">
+			<ExpenseForm expenses={expenses} setExpenses={setExpenses} />
+		</div>
+	);
+};
+
+export default NewExpense;

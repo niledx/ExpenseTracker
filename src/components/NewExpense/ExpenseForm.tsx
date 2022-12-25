@@ -1,29 +1,49 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FC, FormEvent, SetStateAction, useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+interface Props {
+	expenses: {
+		id: string;
+		title: string;
+		amount: number;
+		date: Date;
+	}[];
+	setExpenses: React.Dispatch<
+		SetStateAction<
+			{
+				id: string;
+				title: string;
+				amount: number;
+				date: Date;
+			}[]
+		>
+	>;
+}
+
+const ExpenseForm: FC<Props> = ({ expenses, setExpenses }) => {
 	const [ title, setTitle ] = useState('');
 	const [ amount, setAmount ] = useState('');
 	const [ date, setDate ] = useState('');
 
-	const handleTitleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+	const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value);
 	};
-	const handleAmountChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+	const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setAmount(e.target.value);
 	};
-	const handleDateChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+	const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setDate(e.target.value);
 	};
 
-	const submitHandler = (e:React.FormEvent<HTMLFormElement>) => {
+	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const expesneData = {
+            id: Math.floor(Math.random() * 100).toString(),
 			title,
-			amount,
+			amount: +amount,
 			date: new Date(date)
 		};
-		console.log(expesneData);
+		setExpenses([ expesneData, ...expenses ]);
 		setTitle('');
 		setAmount('');
 		setDate('');
