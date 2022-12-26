@@ -24,19 +24,19 @@ type expensesType = {
 
 const Expenses: FC<Props> = ({ expenses }) => {
 	const [ pickedYear, setPickedYear ] = useState<string>('2022');
-	// const [ filteredExpenses, setFilteredExpesnes ] = useState<expensesType[]>(expenses);
+	const [ filteredExpenses, setFilteredExpesnes ] = useState<expensesType[]>(expenses);
 
-	// useEffect(()=>{
-	// 	setFilteredExpesnes(expenses.filter(expense => expense.date.getFullYear().toString() === pickedYear))
-	// }, [pickedYear, expenses]);
+	useEffect(()=>{
+		setFilteredExpesnes(expenses.filter(expense => expense.date.getFullYear().toString() === pickedYear))
+	}, [pickedYear, expenses]);
 
-	const filteredExpenses = expenses.filter(expense => expense.date.getFullYear().toString() === pickedYear) 
+	// const filteredExpenses = expenses.filter(expense => expense.date.getFullYear().toString() === pickedYear) 
 
 	return (
 		<div>
 			<Card className="expenses">
 				<ExpenseFilter pickedYear={pickedYear} setPickedYear={setPickedYear} />
-				<ExpensesChart expenses={filteredExpenses}/>
+				<ExpensesChart expenses={filteredExpenses} setFilterExpenses={setFilteredExpesnes}/>
 				<ExpenseList filteredExpenses={filteredExpenses}/>
 			</Card>
 		</div>

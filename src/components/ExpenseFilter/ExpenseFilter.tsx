@@ -6,9 +6,12 @@ interface Props {
 	setPickedYear: React.Dispatch<SetStateAction<string>>;
 }
 
-const ExpenseFilter: FC<Props> = ({ pickedYear,setPickedYear }) => {
+const ExpenseFilter: FC<Props> = ({ pickedYear, setPickedYear }) => {
 	const filterHandler = (e: ChangeEvent<HTMLSelectElement>) => {
 		setPickedYear(e.target.value);
+	};
+	const handleReset = () => {
+		setPickedYear('2022');
 	};
 	return (
 		<div className="expenses-filter">
@@ -20,6 +23,7 @@ const ExpenseFilter: FC<Props> = ({ pickedYear,setPickedYear }) => {
 					<option value="2020">2020</option>
 					<option value="2019">2019</option>
 				</select>
+				<button onClick={handleReset}>Reset</button>
 			</div>
 		</div>
 	);

@@ -1,5 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, SetStateAction } from 'react'
 import Chart from '../Chart/Chart'
+
+type expensesType = {
+	id: React.Key;
+	title: string;
+	amount: number;
+	date: Date;
+};
 
 interface Props {
     expenses: {
@@ -8,9 +15,10 @@ interface Props {
 		amount: number;
 		date: Date;
     }[];
+    setFilterExpenses: React.Dispatch<SetStateAction<expensesType[]>>;
 }
 
-const ExpensesChart:FC<Props> = ({expenses}) => {
+const ExpensesChart:FC<Props> = ({expenses, setFilterExpenses}) => {
   
     const chartDataPoints = [
         {label:'Jan', value:0},
@@ -33,8 +41,11 @@ const ExpensesChart:FC<Props> = ({expenses}) => {
     }
     
     return (
-    <Chart dataPoints={chartDataPoints}/>
-  )
+        <>
+        <Chart dataPoints={chartDataPoints} setFilterExpenses={setFilterExpenses} expenses={expenses}/>
+        <p>Click on bar for particular month's data</p>
+        </>
+    )
 }
 
 export default ExpensesChart
